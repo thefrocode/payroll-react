@@ -1,24 +1,29 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { EmployeesList } from "./modules/employees/components/employees-list";
+import "ag-grid-community/styles/ag-grid.css"; // Core grid CSS, always needed
+import "ag-grid-community/styles/ag-theme-alpine.css"; // Optional theme CSS
+import {
+  Link,
+  Outlet,
+  ReactLocation,
+  Router,
+  useMatch,
+} from "@tanstack/react-location";
+import { routes } from "./routes";
 
+const queryClient = new QueryClient();
+const location = new ReactLocation();
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div style={{ height: 500, width: 500 }}>
+      <QueryClientProvider client={queryClient}>
+        <Router location={location} routes={routes}>
+          <div className="mx-auto max-w-3xl">
+            <Outlet />
+          </div>
+        </Router>
+      </QueryClientProvider>
     </div>
   );
 }
