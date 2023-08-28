@@ -1,8 +1,16 @@
 export interface Employee {
     id: number;
-    first_name: string;
-    last_name: string;
-    email: string;
-    phone: string;
-    id_number: string;
+    first_name?: string;
+    last_name?: string;
+    email?: string;
+    phone?: string;
+    id_number?: string;
 }
+export const TEmployee = {
+    id: '',
+    first_name: '',
+    last_name: '',
+    email: '',
+    phone: '',
+    id_number: ''
+};

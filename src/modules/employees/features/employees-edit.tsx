@@ -1,5 +1,6 @@
 import { useEmployeeSource } from "../store";
 import { useMatch } from "@tanstack/react-location";
+import { EmployeesForm } from "../ui/employees-form";
 
 export function EmployeesEdit(){
     const {
@@ -8,9 +9,13 @@ export function EmployeesEdit(){
     const { employees } = useEmployeeSource();
 
     const employee = employees.find((employee) => employee.id === +id);
+
+    const onEmployeeEdited = (data: any) => {
+        console.log("Edit",data);
+      };
+    
+    
     return(
-        <div>
-            {JSON.stringify(employee)}
-        </div>
+        <EmployeesForm employee={employee} onSave={onEmployeeEdited}/>
     )
 }
