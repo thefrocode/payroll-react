@@ -8,6 +8,7 @@ import { EmployeesList } from "./modules/employees/features/employees-list";
 import { IncomesAdd } from "./modules/income/features/incomes-add";
 import { IncomesEdit } from "./modules/income/features/incomes-edit";
 import { IncomesList } from "./modules/income/features/incomes-list";
+import { ReportsList } from "./modules/reports/features/reports-list";
 
 export const routes = [
   {
@@ -74,6 +75,16 @@ export const routes = [
       {
         path: "/add",
         element: <DeductionsAdd />,
+      },
+    ],
+  },
+  {
+    path: "/reports",
+    element: <Home />,
+    children: [
+      {
+        path: "/",
+        element: <ReportsList />,
       },
     ],
   },

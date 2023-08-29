@@ -28,23 +28,28 @@
   "income_types": [
     {
       "id": 1,
-      "name": "Basic Salary"
+      "name": "Basic Salary",
+      "code": "BS"
     },
     {
       "id": 2,
-      "name": "Overtime"
+      "name": "Overtime",
+      "code": "OT"
     },
     {
       "id": 3,
-      "name": "Bonus"
+      "name": "Bonus",
+      "code": "BN"
     },
     {
       "id": 4,
-      "name": "Commission"
+      "name": "Commission",
+      "code": "CO"
     },
     {
       "id": 5,
-      "name": "Allowance"
+      "name": "Allowance",
+      "code": "AL"
     }
   ],
   "incomes": [

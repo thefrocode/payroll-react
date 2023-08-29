@@ -64,9 +64,9 @@ export function useDeductionSource(): {
       const employee = employees.find(
         (employee) => employee.id === deduction.employee_id
       );
-      const deduction_type_name = deduction_types.find(
+      const deduction_type_name = (deduction_types.find(
         (deduction_type) => deduction_type.id === deduction.deduction_type_id
-      )?.name;
+      )?.name)!;
       return {
         ...deduction,
         employee_name: employee?.first_name + " " + employee?.last_name,

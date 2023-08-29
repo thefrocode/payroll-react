@@ -1,10 +1,10 @@
 export interface Income {
   id?: number;
-  employee_id?: number;
-  income_type_id?: number;
-  amount?: number;
-  month?: number;
-  year?: number;
+  employee_id: number;
+  income_type_id: number;
+  amount: number;
+  month: number;
+  year: number;
 }
 export const TIncome = {
   id: "",
@@ -15,8 +15,8 @@ export const TIncome = {
   year: "",
 };
 export interface DetailedIncome extends Income {
-  employee_name?: string;
-  income_type_name?: string;
+  employee_name: string;
+  income_type_name: string;
 }
 type PartialDetailedIncome = Partial<DetailedIncome>;
 

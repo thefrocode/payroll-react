@@ -1,8 +1,8 @@
 export interface Deduction {
   id: number;
   employee_id?: number;
-  deduction_type_id?: number;
-  amount?: number;
+  deduction_type_id: number;
+  amount: number;
   month?: number;
   year?: number;
 }
@@ -16,7 +16,7 @@ export const TDeduction = {
 };
 export interface DetailedDeduction extends Deduction {
   employee_name?: string;
-  deduction_type_name?: string;
+  deduction_type_name: string;
 }
 type PartialDetailedDeduction = Partial<DetailedDeduction>;
 

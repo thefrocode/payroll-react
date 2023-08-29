@@ -11,7 +11,7 @@ export function IncomesForm(props: any) {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data: Income) => {
+  const onSubmit = (data: any) => {
     onSave(data);
   };
 
