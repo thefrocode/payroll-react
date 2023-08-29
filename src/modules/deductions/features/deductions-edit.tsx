@@ -11,7 +11,6 @@ export function DeductionsEdit() {
   const deduction = deductions.find((deduction) => deduction.id === +id);
 
   const onDeductionEdited = (data: any) => {
-    console.log("Edit", data);
     editDeduction({ ...data, id: +id });
   };
 

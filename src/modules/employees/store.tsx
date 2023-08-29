@@ -20,10 +20,15 @@ export function useEmployeeSource(): {
   removeEmployee: UseMutateFunction<void, unknown, number, unknown>;
   error: any;
 } {
+
+  //Fetch all employees
   const queryClient = useQueryClient();
   const { data: employees, error } = useQuery(["employees"], fetchEmployees, {
     initialData: [],
   });
+
+
+  //Generate mutations for updating the employee list
   const { mutate: addEmployee } = useMutation({
     mutationFn: createEmployee,
     onSuccess: () => {
@@ -48,5 +53,10 @@ export function useEmployeeSource(): {
       alert("Employee Deleted");
     },
   });
+
+  
+
+
+
   return { employees, addEmployee, editEmployee, removeEmployee, error };
 }

@@ -14,7 +14,7 @@ import {
 } from "../../shared/data-access/api/incomes";
 import { useEmployeeSource } from "../../employees/store";
 import { useIncomeTypeSource } from "./income-type";
-import { useMemo } from "react";
+import { useCallback, useMemo } from "react";
 import { DetailedIncome } from "../../shared/interfaces/income";
 
 export function useIncomeSource(): {
@@ -36,7 +36,18 @@ export function useIncomeSource(): {
       queryClient.invalidateQueries({ queryKey: ["incomes"] });
       alert("Income Added");
     },
+    onError: (error) => {
+      alert(error);
+    }
   });
+  const handleAddIncomeChange = useCallback(
+		(state:any) => {
+			addIncome(state)
+		},
+		// [mutation, row] // DO NOT DO THIS even if eslint recommends you to add "mutation" there
+		// eslint-disable-next-line
+		[addIncome]
+	)
   const { mutate: editIncome } = useMutation({
     mutationFn: updateIncome,
     onSuccess: () => {
@@ -74,6 +85,7 @@ export function useIncomeSource(): {
 
     return { detailed_incomes };
   }, [incomes, employees, income_types]);
+
 
   return {
     incomes,

@@ -1,5 +1,5 @@
 export interface Income {
-  id: number;
+  id?: number;
   employee_id?: number;
   income_type_id?: number;
   amount?: number;

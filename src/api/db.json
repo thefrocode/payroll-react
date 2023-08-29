@@ -7,6 +7,22 @@
       "email": "janedoe@gmail.com",
       "phone": "254700000001",
       "id_number": "12345668"
+    },
+    {
+      "first_name": "John",
+      "last_name": "Doe",
+      "id_number": "123435",
+      "phone": "342342",
+      "email_address": "aa@gmail.com",
+      "id": 3
+    },
+    {
+      "first_name": "jjj",
+      "last_name": "aaa",
+      "id_number": "aaas",
+      "phone": "254769735528",
+      "email_address": "aa@gmail.com",
+      "id": 4
     }
   ],
   "income_types": [
@@ -41,8 +57,8 @@
       "id": 2
     },
     {
-      "employee_id": 2,
-      "income_type_id": 2,
+      "employee_id": 3,
+      "income_type_id": 1,
       "amount": 10000,
       "month": 1,
       "year": 2023,

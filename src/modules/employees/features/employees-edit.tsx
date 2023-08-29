@@ -11,7 +11,6 @@ export function EmployeesEdit(){
     const employee = employees.find((employee) => employee.id === +id);
 
     const onEmployeeEdited = (data: any) => {
-        console.log("Edit",data);
         editEmployee({...data, id: +id});
       };
     

@@ -1,4 +1,5 @@
 import { useForm } from "react-hook-form";
+import { Income } from "../../shared/interfaces/income";
 import { months } from "../../shared/interfaces/months";
 import { years } from "../../shared/interfaces/years";
 
@@ -10,12 +11,19 @@ export function IncomesForm(props: any) {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data: any) => onSave(data);
+  const onSubmit = (data: Income) => {
+    onSave(data);
+  };
 
   return (
     /* "handleSubmit" will validate your inputs before invoking "onSubmit" */
     <form onSubmit={handleSubmit(onSubmit)}>
-      <select {...register("employee_id")}>
+      <select
+        {...register("employee_id", {
+          valueAsNumber: true,
+          required: true,
+        })}
+      >
         <option value="">Select Employee</option>
         {employees.map((employee: any) => {
           return (
@@ -27,33 +35,56 @@ export function IncomesForm(props: any) {
       </select>
       {errors.employee_id && <span>This field is required</span>}
 
-      <select {...register("income_type_id")}>
+      <select
+        {...register("income_type_id", {
+          valueAsNumber: true,
+          required: true,
+        })}
+      >
         <option value="">Select Income Type</option>
         {income_types.map((income_type: any) => {
-          return <option key={income_type.id} value={income_type.id}>{income_type.name}</option>;
+          return (
+            <option key={income_type.id} value={income_type.id}>
+              {income_type.name}
+            </option>
+          );
         })}
       </select>
       {errors.income_type_id && <span>This field is required</span>}
 
       <input
         defaultValue={income?.amount}
-        {...register("amount", { required: true })}
+        {...register("amount", { required: true, valueAsNumber: true })}
       />
 
       {errors.amount && <span>This field is required</span>}
 
-      <select {...register("month")}>
+      <select {...register("month",{
+        valueAsNumber: true,
+        required: true
+      })}>
         <option value="">Select Month</option>
         {months.map((month: any) => {
-          return <option key={month.id}value={month.id}>{month.name}</option>;
+          return (
+            <option key={month.id} value={month.id}>
+              {month.name}
+            </option>
+          );
         })}
       </select>
       {errors.month && <span>This field is required</span>}
 
-      <select {...register("year")}>
+      <select {...register("year",{
+        valueAsNumber: true,
+        required: true
+      })}>
         <option value="">Select Year</option>
         {years.map((year: any) => {
-          return <option key={year} value={year}>{year}</option>;
+          return (
+            <option key={year} value={year}>
+              {year}
+            </option>
+          );
         })}
       </select>
       {errors.year && <span>This field is required</span>}

@@ -11,7 +11,6 @@ export function IncomesEdit() {
   const income = incomes.find((income) => income.id === +id);
 
   const onIncomeEdited = (data: any) => {
-    console.log("Edit", data);
     editIncome({ ...data, id: +id });
   };
 

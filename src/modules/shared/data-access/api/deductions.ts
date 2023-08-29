@@ -13,7 +13,14 @@ export async function fetchDeductions(): Promise<Deduction[]> {
 
 export async function createDeduction(data: Deduction) {
   try {
-    await axios.post("/deductions", { ...data });
+    const { amount, ...params } = data;
+    const income = await axios.get("/deductions", { params });
+    if (income.data.length === 0) {
+      await axios.post("/deductions", { ...data });
+    } else {
+      throw new Error("Income already exists");
+    }
+    
   } catch (e) {
     throw e;
   }

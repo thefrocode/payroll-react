@@ -1,5 +1,6 @@
 import { Income } from "../../interfaces/income";
 import axios from "axios";
+
 //import axios from "../../config/axiosConfig";
 axios.defaults.baseURL = "http://localhost:3001";
 export async function fetchIncomes(): Promise<Income[]> {
@@ -13,7 +14,13 @@ export async function fetchIncomes(): Promise<Income[]> {
 
 export async function createIncome(data: Income) {
   try {
-    await axios.post("/incomes", { ...data });
+    const { amount, ...params } = data;
+    const income = await axios.get("/incomes", { params });
+    if (income.data.length === 0) {
+      await axios.post("/incomes", { ...data });
+    } else {
+      throw new Error("Income already exists");
+    }
   } catch (e) {
     throw e;
   }
