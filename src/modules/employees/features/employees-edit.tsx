@@ -6,12 +6,13 @@ export function EmployeesEdit(){
     const {
         params: { id },
       } = useMatch();
-    const { employees } = useEmployeeSource();
+    const { employees, editEmployee } = useEmployeeSource();
 
     const employee = employees.find((employee) => employee.id === +id);
 
     const onEmployeeEdited = (data: any) => {
         console.log("Edit",data);
+        editEmployee({...data, id: +id});
       };
     
     

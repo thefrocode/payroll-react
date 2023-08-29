@@ -1,27 +1,25 @@
 import { AgGridReact } from "ag-grid-react";
 import { Link } from "@tanstack/react-location";
-import { useEmployeeSource } from "../store";
-import { TEmployee } from "../../shared/interfaces/employee";
+import { useDeductionSource } from "../store/deduction";
+import { TDetailedDeduction } from "../../shared/interfaces/deduction";
 
+export function DeductionsList() {
+  const { detailed_deductions, removeDeduction } = useDeductionSource();
 
-
-export function EmployeesList() {
-  const { employees, removeEmployee} = useEmployeeSource();
-
-  const columnDefs:{
+  const columnDefs: {
     headerName: string;
     field: string;
     cellRenderer?: (params: any) => any;
-  }[] = Object.keys(TEmployee).map((key) => ({
+  }[] = Object.keys(TDetailedDeduction).map((key) => ({
     headerName: key.replace("_", " ").toString().toLocaleUpperCase(),
-    field: key
+    field: key,
   }));
   columnDefs.push({
     field: "id",
     headerName: "Delete",
     cellRenderer: (params: any) => {
       return (
-        <Link key={params.value} to={`/employees/edit/${params.value}`}>
+        <Link key={params.value} to={`/deductions/edit/${params.value}`}>
           Edit
         </Link>
       );
@@ -32,21 +30,19 @@ export function EmployeesList() {
     headerName: "Delete",
     cellRenderer: (params: any) => {
       return (
-        <button key={params.value} onClick={()=> removeEmployee(params.value)}>
+        <button key={params.value} onClick={() => removeDeduction(params.value)}>
           Edit
         </button>
       );
     },
   });
 
-
-
   return (
     <div className="ag-theme-alpine" style={{ height: 500, width: 1000 }}>
-      <Link to="/employees/add">Add</Link>
+      <Link to="/deductions/add">Add</Link>
 
       <AgGridReact
-        rowData={employees} // Row Data for Rows
+        rowData={detailed_deductions} // Row Data for Rows
         columnDefs={columnDefs}
       />
     </div>

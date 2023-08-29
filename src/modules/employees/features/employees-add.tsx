@@ -1,9 +1,12 @@
+import { useEmployeeSource } from "../store";
 import { EmployeesForm } from "../ui/employees-form";
 
 export function EmployeesAdd() {
+
+  const { addEmployee } = useEmployeeSource();
   const onEmployeeAdded = (data: any) => {
-    console.log("Add",data);
+    addEmployee(data);
   };
 
-  return <EmployeesForm onSave={onEmployeeAdded}/>;
+  return (<EmployeesForm onSave={onEmployeeAdded}/>);
 }

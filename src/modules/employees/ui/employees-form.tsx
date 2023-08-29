@@ -28,6 +28,40 @@ export function EmployeesForm(props: any) {
 
       {errors.last_name && <span>This field is required</span>}
 
+      <input
+        defaultValue={employee?.id_number}
+        {...register("id_number", { required: true })}
+      />
+
+      {errors.id_number && <span>This field is required</span>}
+
+      <input
+        defaultValue={employee?.phone}
+        {...register("phone", { required: true })}
+      />
+
+      {errors.phone && <span>This field is required</span>}
+
+      <input
+        defaultValue={employee?.email_address}
+        {...register("email_address", {
+          required: true,
+          validate: {
+            matchPattern: (v) =>
+              /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(v) ||
+              "Email address must be a valid address",
+          },
+        })}
+      />
+
+      {errors.email_address?.type === "required" && (
+        <small>Email is required</small>
+      )}
+
+      {errors.email_address?.type === "matchPattern" && (
+        <small>Email address must be a valid address</small>
+      )}
+
       <input type="submit" />
     </form>
   );
