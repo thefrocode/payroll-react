@@ -40,14 +40,7 @@ export function useIncomeSource(): {
       alert(error);
     }
   });
-  const handleAddIncomeChange = useCallback(
-		(state:any) => {
-			addIncome(state)
-		},
-		// [mutation, row] // DO NOT DO THIS even if eslint recommends you to add "mutation" there
-		// eslint-disable-next-line
-		[addIncome]
-	)
+  
   const { mutate: editIncome } = useMutation({
     mutationFn: updateIncome,
     onSuccess: () => {
@@ -73,13 +66,14 @@ export function useIncomeSource(): {
       const employee = employees.find(
         (employee) => employee.id === income.employee_id
       );
-      const income_type_name = (income_types.find(
+      const income_type = income_types.find(
         (income_type) => income_type.id === income.income_type_id
-      )?.name)!;
+      );
       return {
         ...income,
         employee_name: employee?.first_name + " " + employee?.last_name,
-        income_type_name,
+        income_type_name: (income_type?.name)!,
+        income_type_code: (income_type?.code)!,
       };
     });
 

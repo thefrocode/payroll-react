@@ -68,38 +68,123 @@
       "month": 1,
       "year": 2023,
       "id": 3
+    },
+    {
+      "employee_id": 2,
+      "income_type_id": 4,
+      "amount": 10000,
+      "month": 1,
+      "year": 2023,
+      "id": 4
     }
   ],
   "deduction_types": [
     {
       "id": 1,
-      "name": "Sacco"
+      "name": "Sacco",
+      "code": "SC"
     },
     {
       "id": 2,
-      "name": "Advance"
+      "name": "Advance",
+      "code": "AD"
     },
     {
       "id": 3,
-      "name": "Welfare"
+      "name": "Welfare",
+      "code": "WE"
     },
     {
       "id": 4,
-      "name": "Loan"
+      "name": "Loan",
+      "code": "LO"
     },
     {
       "id": 5,
-      "name": "Other"
+      "name": "Commission",
+      "code": "CO"
+    },
+    {
+      "id": 6,
+      "name": "HELB",
+      "code": "HE"
     }
   ],
   "deductions": [
     {
       "employee_id": 2,
       "deduction_type_id": 1,
-      "amount": "10000",
-      "month": "1",
-      "year": "2024",
+      "amount": 10000,
+      "month": 1,
+      "year": 2024,
       "id": 1
     }
+  ],
+  "formulas": [
+    {
+      "id": 1,
+      "name": "Gross Pay",
+      "formula": "BS + CO + OT + FD"
+    },{
+      "id": 2,
+      "name": "NSSF Tier 1",
+      "formula": "gross_pay<=6000?0.06*gross_pay:360"
+    },
+    {
+      "id": 3,
+      "name": "NSSF Tier 2",
+      "formula": "gross_pay>6000?(gross_pay<18000?0.06*(gross_pay-6000):720):0"
+    },
+    {
+      "id": 4,
+      "name": "NSSF",
+      "formula": "nssf_tier_1 + nssf_tier_2"
+    },
+    {
+      "id":5,
+      "name": "Taxable Income",
+      "formula": "gross_pay - nssf"
+    },
+    {
+      "id":6,
+      "name":"Tax Before Relief",
+      "formula": "taxable_income <= 32333 ? (taxable_income > 24000 ? (2400 + (taxable_income - 24000) * 0.25) : taxable_income * 0.1) : (4483.25 + (taxable_income-32333) * 0.3)"
+    },
+    {
+      "id":7,
+      "name":"Personal Relief",
+      "formula": "taxable_income>24000? 2400: taxable_income * 0.1"
+    },
+    {
+      "id": 8,
+      "name": "NHIF",
+      "formula": "gross_pay<100000? (gross_pay<90000? (gross_pay < 80000?(gross_pay < 70000? (gross_pay < 60000? (gross_pay < 50000 ? (gross_pay < 45000? (gross_pay < 40000? (gross_pay < 35000? (gross_pay < 30000? (gross_pay < 25000? (gross_pay < 20000? (gross_pay < 15000? (gross_pay < 12000?(gross_pay < 8000? (gross_pay < 6000?150:300):400):500):600):750): 850):900): 950): 1000): 1100) :1200):1300) :1400) :1500) : 1600):1700"
+    },
+    {
+      "id": 9,
+      "name": "NHIF Relief",
+      "formula": "nhif * 0.15"
+    },
+    {
+      "id":10,
+      "name": "PAYE",
+      "formula": "tax_before_relief-personal_relief-nhif_relief>=0?tax_before_relief-personal_relief-nhif_relief:0"
+    },
+    {
+      "id":11,
+      "name": "Housing Levy",
+      "formula": "gross_pay * 0.015"
+    },
+    {
+      "id":12,
+      "name": "Total Deductions",
+      "formula": "paye + nssf + nhif + housing_levy+ SC + AD + LO + WE + NO + HE"
+    },
+    {
+      "id":13,
+      "name": "Net Pay",
+      "formula": "gross_pay - total_deductions"
+    }
+
   ]
 }

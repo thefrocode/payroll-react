@@ -17,6 +17,7 @@ export const TIncome = {
 export interface DetailedIncome extends Income {
   employee_name: string;
   income_type_name: string;
+  income_type_code: string;
 }
 type PartialDetailedIncome = Partial<DetailedIncome>;
 

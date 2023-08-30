@@ -17,6 +17,7 @@ export const TDeduction = {
 export interface DetailedDeduction extends Deduction {
   employee_name?: string;
   deduction_type_name: string;
+  deduction_type_code: string;
 }
 type PartialDetailedDeduction = Partial<DetailedDeduction>;
 

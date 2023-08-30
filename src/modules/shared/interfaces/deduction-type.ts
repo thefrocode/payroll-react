@@ -1,4 +1,5 @@
 export interface DeductionType {
     id: number;
-    name?: string;
+    name: string;
+    code: string;
 }
