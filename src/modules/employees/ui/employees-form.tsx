@@ -62,6 +62,13 @@ export function EmployeesForm(props: any) {
         <small>Email address must be a valid address</small>
       )}
 
+      <input
+        defaultValue={employee?.nhif_number}
+        {...register("nhif_number", { required: true })}
+      />
+
+      {errors.nhif_number && <span>This field is required</span>}
+
       <input type="submit" />
     </form>
   );

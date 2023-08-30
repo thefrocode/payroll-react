@@ -5,6 +5,7 @@ export interface Employee {
     email?: string;
     phone?: string;
     id_number?: string;
+    nhif_number?: string;
 }
 export const TEmployee = {
     id: '',

@@ -24,15 +24,14 @@ export interface Report {
 }
 
 export const TReport = {
+    "first_name":"",
+    "last_name":"",
     "BS":0,
     "CO":0,
     "SC":0,
     "email":"",
-    "first_name":"",
-    "last_name":"",
     "gross_pay":"",
     "housing_levy":"",
-    "id":0,
     "id_number":"",
     "net_pay":"",
     "nhif":"",
@@ -46,4 +45,21 @@ export const TReport = {
     "tax_before_relief":"",
     "taxable_income":"",
     "total_deductions":""
+}
+export const TReportNHIF = {
+    "first_name":"",
+    "last_name":"",
+    "id_number":"",
+    "nhif_number":"",
+    "nhif":0
+}
+
+export const TReportNSSF = {
+    "first_name":"",
+    "last_name":"",
+    "id_number":"",
+    "nssf_number":"",
+    "gross_pay":"",
+    "nssf":0
+
 }

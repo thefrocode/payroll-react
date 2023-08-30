@@ -9,6 +9,8 @@ import { IncomesAdd } from "./modules/income/features/incomes-add";
 import { IncomesEdit } from "./modules/income/features/incomes-edit";
 import { IncomesList } from "./modules/income/features/incomes-list";
 import { ReportsList } from "./modules/reports/features/reports-list";
+import { ReportsNHIF } from "./modules/reports/features/reports-nhif";
+import { ReportsNSSF } from "./modules/reports/features/reports-nssf";
 
 export const routes = [
   {
@@ -85,6 +87,14 @@ export const routes = [
       {
         path: "/",
         element: <ReportsList />,
+      },
+      {
+        path: "/nhif",
+        element: <ReportsNHIF />,
+      },
+      {
+        path: "/nssf",
+        element: <ReportsNSSF />,
       },
     ],
   },
