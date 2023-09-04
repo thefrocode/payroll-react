@@ -15,6 +15,7 @@ import {
 import { useEmployeeSource } from "../../employees/store";
 import { useDeductionTypeSource } from "./deduction-type";
 import { useMemo } from "react";
+import { useShared } from "../../shared/store/active";
 
 export function useDeductionSource(): {
   deductions: Deduction[];
@@ -25,8 +26,10 @@ export function useDeductionSource(): {
   detailed_deductions: DetailedDeduction[];
 } {
   const queryClient = useQueryClient();
+  const { active_month } = useShared();
+
   const { data: deductions, error } = useQuery(
-    ["deductions"],
+    ["deductions",{...active_month}],
     fetchDeductions,
     {
       initialData: [],

@@ -8,7 +8,8 @@
       "phone": "254700000001",
       "id_number": "12345668",
       "email_address": "aa@gmail.com",
-      "nhif_number": "12345668"
+      "nhif_number": "12345668",
+      "employee_id": "34234"
     },
     {
       "first_name": "John",
@@ -16,7 +17,9 @@
       "id_number": "123435",
       "phone": "342342",
       "email_address": "aa@gmail.com",
-      "id": 3
+      "id": 3,
+      "employee_id": "356354",
+      "nhif_number": "afs"
     },
     {
       "first_name": "jjj",
@@ -24,7 +27,9 @@
       "id_number": "aaas",
       "phone": "254769735528",
       "email_address": "aa@gmail.com",
-      "id": 4
+      "id": 4,
+      "employee_id": "576",
+      "nhif_number": "324"
     }
   ],
   "income_types": [
@@ -66,9 +71,9 @@
     {
       "employee_id": 3,
       "income_type_id": 1,
-      "amount": 10000,
+      "amount": 20000,
       "month": 1,
-      "year": 2023,
+      "year": null,
       "id": 3
     },
     {
@@ -78,6 +83,30 @@
       "month": 1,
       "year": 2023,
       "id": 4
+    },
+    {
+      "employee_id": 2,
+      "income_type_id": 1,
+      "amount": 60000,
+      "month": 9,
+      "year": 2023,
+      "id": 5
+    },
+    {
+      "employee_id": 3,
+      "income_type_id": 1,
+      "amount": 90000,
+      "month": 9,
+      "year": 2023,
+      "id": 6
+    },
+    {
+      "employee_id": 2,
+      "income_type_id": 2,
+      "amount": 5000,
+      "month": 9,
+      "year": 2023,
+      "id": 7
     }
   ],
   "deduction_types": [
@@ -120,6 +149,14 @@
       "month": 1,
       "year": 2024,
       "id": 1
+    },
+    {
+      "employee_id": 2,
+      "deduction_type_id": 1,
+      "amount": 9000,
+      "month": 9,
+      "year": 2023,
+      "id": 2
     }
   ],
   "formulas": [
@@ -188,5 +225,90 @@
       "name": "Net Pay",
       "formula": "gross_pay - total_deductions"
     }
-  ]
+  ],
+  "reports": [
+    {
+      "id": 2,
+      "first_name": "Jane",
+      "last_name": "Doe",
+      "email": "janedoe@gmail.com",
+      "phone": "254700000001",
+      "id_number": "12345668",
+      "email_address": "aa@gmail.com",
+      "nhif_number": "12345668",
+      "employee_id": "34234",
+      "BS": 60000,
+      "OT": 5000,
+      "SC": 9000,
+      "month": 9,
+      "year": 2023,
+      "gross_pay": "65000.00",
+      "nssf_tier_1": "360.00",
+      "nssf_tier_2": "720.00",
+      "nssf": "1080.00",
+      "taxable_income": "63920.00",
+      "tax_before_relief": "13959.35",
+      "personal_relief": "2400.00",
+      "nhif": "1300.00",
+      "nhif_relief": "195.00",
+      "paye": "11364.35",
+      "housing_levy": "975.00",
+      "total_deductions": "23719.35",
+      "net_pay": "41280.65"
+    },
+    {
+      "first_name": "John",
+      "last_name": "Doe",
+      "id_number": "123435",
+      "phone": "342342",
+      "email_address": "aa@gmail.com",
+      "id": 3,
+      "employee_id": "356354",
+      "nhif_number": "afs",
+      "month": 9,
+      "year": 2023,
+      "gross_pay": "0.00",
+      "nssf_tier_1": "0.00",
+      "nssf_tier_2": "0.00",
+      "nssf": "0.00",
+      "taxable_income": "0.00",
+      "tax_before_relief": "0.00",
+      "personal_relief": "0.00",
+      "nhif": "150.00",
+      "nhif_relief": "22.50",
+      "paye": "0.00",
+      "housing_levy": "0.00",
+      "total_deductions": "150.00",
+      "net_pay": "-150.00"
+    },
+    {
+      "first_name": "jjj",
+      "last_name": "aaa",
+      "id_number": "aaas",
+      "phone": "254769735528",
+      "email_address": "aa@gmail.com",
+      "id": 4,
+      "employee_id": "576",
+      "nhif_number": "324",
+      "month": 9,
+      "year": 2023,
+      "gross_pay": "0.00",
+      "nssf_tier_1": "0.00",
+      "nssf_tier_2": "0.00",
+      "nssf": "0.00",
+      "taxable_income": "0.00",
+      "tax_before_relief": "0.00",
+      "personal_relief": "0.00",
+      "nhif": "150.00",
+      "nhif_relief": "22.50",
+      "paye": "0.00",
+      "housing_levy": "0.00",
+      "total_deductions": "150.00",
+      "net_pay": "-150.00"
+    }
+  ],
+  "active_month": {
+    "month": 9,
+    "year": 2023
+  }
 }

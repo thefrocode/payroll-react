@@ -14,6 +14,10 @@ import { ReportsNSSF } from "./modules/reports/features/reports-nssf";
 
 export const routes = [
   {
+    path: "/",
+    element: <Home />,
+  },
+  {
     path: "/employees",
 
     children: [

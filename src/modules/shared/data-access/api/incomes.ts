@@ -1,11 +1,14 @@
 import { Income } from "../../interfaces/income";
 import axios from "axios";
+import { ActiveMonth } from "../../interfaces/active-month";
 
 //import axios from "../../config/axiosConfig";
 axios.defaults.baseURL = "http://localhost:3001";
-export async function fetchIncomes(): Promise<Income[]> {
+export async function fetchIncomes({queryKey}:any): Promise<Income[]> {
+  const [_key, { month, year }] = queryKey
+  console.log(queryKey)
   try {
-    const incomes = await axios.get("/incomes");
+    const incomes = await axios.get("/incomes", { params: { month, year } });
     return incomes.data;
   } catch (e) {
     throw e;

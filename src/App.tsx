@@ -11,10 +11,12 @@ import {
   useMatch,
 } from "@tanstack/react-location";
 import { routes } from "./routes";
+import { useShared } from "./modules/shared/store/active";
 
 const queryClient = new QueryClient();
 const location = new ReactLocation();
 function App() {
+  
   return (
     <div style={{ height: 500, width: 500 }}>
       <QueryClientProvider client={queryClient}>

@@ -2,9 +2,11 @@ import { Deduction } from "../../interfaces/deduction";
 import axios from "axios";
 //import axios from "../../config/axiosConfig";
 axios.defaults.baseURL = "http://localhost:3001";
-export async function fetchDeductions(): Promise<Deduction[]> {
+export async function fetchDeductions({queryKey}: any): Promise<Deduction[]> {
+
+  const [ _key, { month, year } ] = queryKey
   try {
-    const deductions = await axios.get("/deductions");
+    const deductions = await axios.get("/deductions", { params: { month, year } });
     return deductions.data;
   } catch (e) {
     throw e;

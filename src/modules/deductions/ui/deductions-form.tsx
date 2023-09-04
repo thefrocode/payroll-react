@@ -1,16 +1,16 @@
 import { useForm } from "react-hook-form";
-import { months } from "../../shared/interfaces/months";
-import { years } from "../../shared/interfaces/years";
+import { useShared } from "../../shared/store/active";
 
 export function DeductionsForm(props: any) {
   const { deduction, onSave, employees, deduction_types } = props;
+  const { active_month } = useShared();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data: any) => onSave(data);
+  const onSubmit = (data: any) => onSave({...data,...active_month});
 
   return (
     /* "handleSubmit" will validate your inputs before invoking "onSubmit" */
@@ -56,7 +56,7 @@ export function DeductionsForm(props: any) {
 
       {errors.amount && <span>This field is required</span>}
 
-      <select
+      {/* <select
         {...register("month", {
           valueAsNumber: true,
           required: true,
@@ -88,7 +88,7 @@ export function DeductionsForm(props: any) {
           );
         })}
       </select>
-      {errors.year && <span>This field is required</span>}
+      {errors.year && <span>This field is required</span>} */}
 
       <input type="submit" />
     </form>

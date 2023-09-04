@@ -14,6 +14,14 @@ export function EmployeesForm(props: any) {
     /* "handleSubmit" will validate your inputs before invoking "onSubmit" */
     <form onSubmit={handleSubmit(onSubmit)}>
       <input
+        defaultValue={employee?.employee_id}
+        {...register("employee_id", {
+          required: true,
+        })}
+      />
+      {errors.employee_id && <span>This field is required</span>}
+
+      <input
         defaultValue={employee?.first_name}
         {...register("first_name", {
           required: true,

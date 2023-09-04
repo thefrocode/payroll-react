@@ -16,6 +16,7 @@ import { useEmployeeSource } from "../../employees/store";
 import { useIncomeTypeSource } from "./income-type";
 import { useCallback, useMemo } from "react";
 import { DetailedIncome } from "../../shared/interfaces/income";
+import { useShared } from "../../shared/store/active";
 
 export function useIncomeSource(): {
   incomes: Income[];
@@ -25,10 +26,17 @@ export function useIncomeSource(): {
   error: any;
   detailed_incomes: DetailedIncome[];
 } {
+  const { active_month } = useShared();
   const queryClient = useQueryClient();
-  const { data: incomes, error } = useQuery(["incomes"], fetchIncomes, {
-    initialData: [],
-  });
+
+  
+  const { data: incomes, error } = useQuery(
+    ["incomes",{...active_month}],
+    fetchIncomes,
+    {
+      initialData: [],
+    }
+  );
   const { mutate: addIncome } = useMutation({
     mutationFn: createIncome,
     onSuccess: () => {
@@ -38,9 +46,9 @@ export function useIncomeSource(): {
     },
     onError: (error) => {
       alert(error);
-    }
+    },
   });
-  
+
   const { mutate: editIncome } = useMutation({
     mutationFn: updateIncome,
     onSuccess: () => {
@@ -60,7 +68,7 @@ export function useIncomeSource(): {
 
   const { employees } = useEmployeeSource();
   const { income_types } = useIncomeTypeSource();
-  
+
   const { detailed_incomes } = useMemo(() => {
     const detailed_incomes = incomes.map((income) => {
       const employee = employees.find(
@@ -72,14 +80,13 @@ export function useIncomeSource(): {
       return {
         ...income,
         employee_name: employee?.first_name + " " + employee?.last_name,
-        income_type_name: (income_type?.name)!,
-        income_type_code: (income_type?.code)!,
+        income_type_name: income_type?.name!,
+        income_type_code: income_type?.code!,
       };
     });
 
     return { detailed_incomes };
   }, [incomes, employees, income_types]);
-
 
   return {
     incomes,

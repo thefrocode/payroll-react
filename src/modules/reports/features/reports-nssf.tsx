@@ -1,5 +1,5 @@
 import { AgGridReact } from "ag-grid-react";
-import { TReport, TReportNSSF } from "../../shared/interfaces/report";
+import { TReportNSSF } from "../../shared/interfaces/report";
 import { useReportsSource } from "../store/reports";
 export function ReportsNSSF() {
   const { employeeIncomeDeduction: rowData } = useReportsSource();
@@ -11,6 +11,7 @@ export function ReportsNSSF() {
     headerName: key.replace("_", " ").toString().toLocaleUpperCase(),
     field: key,
   }));
+  console.log(rowData);
 
   return (
     <div className="ag-theme-alpine" style={{ height: 500, width: 1000 }}>
