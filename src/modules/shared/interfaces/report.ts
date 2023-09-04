@@ -1,29 +1,32 @@
+// export interface Report {
+//     "BS":number,
+//     "CO":number,
+//     "SC":number,
+//     "email":string,
+//     "first_name":string,
+//     "last_name":string,
+//     "gross_pay":string,
+//     "housing_levy":string,
+//     "id":number,
+//     "id_number":string,
+//     "net_pay":string,
+//     "nhif":string,
+//     "nhif_relief":string,
+//     "nssf":string,
+//     "nssf_tier_1":string,
+//     "nssf_tier_2":string,
+//     "paye":string,
+//     "personal_relief":string,
+//     "phone":string,
+//     "tax_before_relief":string,
+//     "taxable_income":string,
+//     "total_deductions":string
+// }
 export interface Report {
-    "BS":number,
-    "CO":number,
-    "SC":number,
-    "email":string,
-    "first_name":string,
-    "last_name":string,
-    "gross_pay":string,
-    "housing_levy":string,
-    "id":number,
-    "id_number":string,
-    "net_pay":string,
-    "nhif":string,
-    "nhif_relief":string,
-    "nssf":string,
-    "nssf_tier_1":string,
-    "nssf_tier_2":string,
-    "paye":string,
-    "personal_relief":string,
-    "phone":string,
-    "tax_before_relief":string,
-    "taxable_income":string,
-    "total_deductions":string
+    [key:string]: string | number
 }
 
-export const TReport = {
+export const TReport= {
     "first_name":"",
     "last_name":"",
     "BS":0,
@@ -62,4 +65,8 @@ export const TReportNSSF = {
     "gross_pay":"",
     "nssf":0
 
+}
+
+export interface SavedReport {
+    [key:string]: string | number
 }
