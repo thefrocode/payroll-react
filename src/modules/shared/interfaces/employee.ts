@@ -6,6 +6,9 @@ export interface Employee {
     phone?: string;
     id_number?: string;
     nhif_number?: string;
+    nssf_number?: string;
+    branch: string;
+    department: string;
 }
 export const TEmployee = {
     id: '',
@@ -14,5 +17,7 @@ export const TEmployee = {
     last_name: '',
     email: '',
     phone: '',
-    id_number: ''
+    id_number: '',
+    branch: '',
+    department: '',
 };

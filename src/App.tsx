@@ -5,6 +5,7 @@ import "ag-grid-community/styles/ag-theme-alpine.css"; // Optional theme CSS
 import { Outlet, ReactLocation, Router } from "@tanstack/react-location";
 import { routes } from "./routes";
 import { ActiveProvider } from "./modules/shared/store/active";
+import { EmployeesProvider } from "./modules/employees/store";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -13,7 +14,6 @@ const queryClient = new QueryClient({
       refetchOnWindowFocus: false,
       //staleTime: 1000 * 60 * 5,
     },
-    
   },
 });
 const location = new ReactLocation();
@@ -22,11 +22,13 @@ function App() {
     <div>
       <QueryClientProvider client={queryClient}>
         <ActiveProvider>
-          <Router location={location} routes={routes}>
-            <div>
-              <Outlet />
-            </div>
-          </Router>
+          <EmployeesProvider>
+            <Router location={location} routes={routes}>
+              <div>
+                <Outlet />
+              </div>
+            </Router>
+          </EmployeesProvider>
         </ActiveProvider>
       </QueryClientProvider>
     </div>

@@ -1,4 +1,4 @@
-import { useEmployeeSource } from "../../employees/store";
+import { useEmployee } from "../../employees/store";
 import { Income } from "../../shared/interfaces/income";
 import { useShared } from "../../shared/store/active";
 import { useIncomeSource } from "../store/income";
@@ -7,7 +7,7 @@ import { IncomesForm } from "../ui/incomes-form";
 
 export function IncomesAdd() {
   const { addIncome } = useIncomeSource();
-  const { employees } = useEmployeeSource();
+  const { employees } = useEmployee();
   const { income_types } = useIncomeTypeSource();
   const { active_month } = useShared();
   const onIncomeAdded = (data: Income) => {

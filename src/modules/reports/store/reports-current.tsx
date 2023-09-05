@@ -1,6 +1,6 @@
 import { useEffect, useMemo } from "react";
 import { useDeductionSource } from "../../deductions/store/deduction";
-import { useEmployeeSource } from "../../employees/store";
+import { useEmployee } from "../../employees/store";
 import { useIncomeSource } from "../../income/store/income";
 import { DetailedDeduction } from "../../shared/interfaces/deduction";
 import { DetailedIncome, Income } from "../../shared/interfaces/income";
@@ -19,7 +19,7 @@ import { Report } from "../../shared/interfaces/report";
 export function useCurrentReportsSource() {
   const { detailed_incomes: incomes } = useIncomeSource();
   const { detailed_deductions: deductions } = useDeductionSource();
-  const { employees } = useEmployeeSource();
+  const { employees } = useEmployee();
   const { formulas } = useFormulasSource();
   const { active_month } = useShared();
 
@@ -31,7 +31,6 @@ export function useCurrentReportsSource() {
       initialData: [],
     }
   );
-  
 
   const { mutate: editBatchReports } = useMutation({
     mutationFn: updateBatchReports,
@@ -44,8 +43,8 @@ export function useCurrentReportsSource() {
    *  This is to simulate a pivot table
    **/
 
-  const employeeIncomeDeduction:Report[] = useMemo(() => {
-    const employeeInfo = employees.map((employee) => {
+  const employeeIncomeDeduction: Report[] | undefined = useMemo(() => {
+    const employeeInfo = employees?.map((employee) => {
       //Each income to have its own column
       const employeeIncomes = incomes
         .filter((income) => income.employee_id === employee.id)
@@ -73,7 +72,6 @@ export function useCurrentReportsSource() {
           {}
         );
 
-      
       return {
         ...employee,
         ...employeeIncomes,
@@ -82,29 +80,28 @@ export function useCurrentReportsSource() {
         year: active_month?.year,
         employee_id: employee.id,
       };
-    });
+    }).filter((employee)=>employee.first_name);
 
-    
-    employeeInfo.forEach((employee_income: any) => {
-      formulas.forEach((formula:any) => {
-        employee_income[formula.name] = safeEvaluate(formula.formula, employee_income).toFixed(2);
+    employeeInfo?.forEach((employee_income: any) => {
+      formulas.forEach((formula: any) => {
+        employee_income[formula.name] = safeEvaluate(
+          formula.formula,
+          employee_income
+        ).toFixed(2);
       });
     });
-    console.log(employeeInfo)
     return employeeInfo;
-    
-  }, [incomes, deductions, employees, formulas]);
+  }, [incomes, deductions, employees, formulas, active_month]);
 
   //wrap forEach in a promise and await it
 
- 
   useEffect(() => {
-    editBatchReports(employeeIncomeDeduction);
+    if (employeeIncomeDeduction) {
+      editBatchReports(employeeIncomeDeduction);
+    }
   }, [employeeIncomeDeduction]);
 
-  console.log(employeeIncomeDeduction);
-
-  return { data:employeeIncomeDeduction };
+  return { data: employeeIncomeDeduction };
 }
 function safeEvaluate(expression: any, scope: any) {
   const definedSymbols = Object.keys(scope);

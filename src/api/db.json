@@ -9,7 +9,9 @@
       "id_number": "12345668",
       "email_address": "aa@gmail.com",
       "nhif_number": "12345668",
-      "employee_id": "34234"
+      "employee_id": "34234",
+      "branch": "Rongai",
+      "department": "Tech"
     },
     {
       "first_name": "John",
@@ -19,7 +21,9 @@
       "email_address": "aa@gmail.com",
       "id": 3,
       "employee_id": "356354",
-      "nhif_number": "afs"
+      "nhif_number": "afs",
+      "branch": "CBD",
+      "department": "Tech"
     },
     {
       "first_name": "jjj",
@@ -29,7 +33,9 @@
       "email_address": "aa@gmail.com",
       "id": 4,
       "employee_id": "576",
-      "nhif_number": "324"
+      "nhif_number": "324",
+      "branch": "Rongai",
+      "department": "Sales"
     }
   ],
   "income_types": [
@@ -237,6 +243,8 @@
       "email_address": "aa@gmail.com",
       "nhif_number": "12345668",
       "employee_id": 2,
+      "branch": "Rongai",
+      "department": "Tech",
       "BS": 60000,
       "OT": 5000,
       "SC": 9000,
@@ -265,6 +273,8 @@
       "id": 4,
       "employee_id": 4,
       "nhif_number": "324",
+      "branch": "Rongai",
+      "department": "Sales",
       "month": 9,
       "year": 2023,
       "gross_pay": "0.00",
@@ -290,6 +300,8 @@
       "id": 3,
       "employee_id": 3,
       "nhif_number": "afs",
+      "branch": "CBD",
+      "department": "Tech",
       "BS": 90000,
       "month": 9,
       "year": 2023,

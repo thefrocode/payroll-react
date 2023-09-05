@@ -15,7 +15,7 @@ export const TIncome = {
   year: "",
 };
 export interface DetailedIncome extends Income {
-  employee_name: string;
+  employee_name?: string;
   income_type_name: string;
   income_type_code: string;
 }

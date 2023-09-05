@@ -1,12 +1,11 @@
 import { AgGridReact } from "ag-grid-react";
 import { Link } from "@tanstack/react-location";
-import { useEmployeeSource } from "../store";
+import { useEmployee} from "../store";
 import { TEmployee } from "../../shared/interfaces/employee";
 
 export function EmployeesList() {
-  console.log("EmployeesList Rendered");
-  const { employees, removeEmployee } = useEmployeeSource();
-
+  const { employees, removeEmployee } = useEmployee();
+  
   const columnDefs: {
     headerName: string;
     field: string;

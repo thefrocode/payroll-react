@@ -12,21 +12,28 @@ import {
   fetchEmployees,
   updateEmployee,
 } from "../shared/data-access/api/employees";
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useMemo,
+  useReducer,
+  useState,
+} from "react";
 
-export function useEmployeeSource(): {
-  employees: Employee[];
+function useEmployeeSource(): {
+  employees?: Employee[];
   addEmployee: UseMutateFunction<void, unknown, Employee, unknown>;
   editEmployee: UseMutateFunction<void, unknown, Employee, unknown>;
   removeEmployee: UseMutateFunction<void, unknown, number, unknown>;
   error: any;
+  filterEmployees: (action: any) => void;
 } {
-
   //Fetch all employees
   const queryClient = useQueryClient();
   const { data: employees, error } = useQuery(["employees"], fetchEmployees, {
     initialData: [],
   });
-
 
   //Generate mutations for updating the employee list
   const { mutate: addEmployee } = useMutation({
@@ -54,9 +61,49 @@ export function useEmployeeSource(): {
     },
   });
 
-  
+  const [filter, setFilter] = useState("");
 
+  const filteredEmployees = useMemo(() => {
+    if (filter) {
+      const filteredEmployees = employees.filter((employee) => {
+        return (
+          employee.branch.toLowerCase().includes(filter.toLowerCase()) ||
+          employee.department.toLowerCase().includes(filter.toLowerCase())
+        );
+      });
+      return filteredEmployees;
+    } else {
+      return employees;
+    }
+  }, [employees, filter]);
 
+  const filterEmployees = useCallback(
+    (search: string) => {
+      setFilter(search);
+    },
+    [setFilter]
+  );
 
-  return { employees, addEmployee, editEmployee, removeEmployee, error };
+  return {
+    employees: filteredEmployees,
+    addEmployee,
+    editEmployee,
+    removeEmployee,
+    error,
+    filterEmployees,
+  };
+}
+const EmployeesContext = createContext<ReturnType<typeof useEmployeeSource>>(
+  {} as unknown as ReturnType<typeof useEmployeeSource>
+);
+
+export function useEmployee() {
+  return useContext(EmployeesContext);
+}
+export function EmployeesProvider({ children }: { children: React.ReactNode }) {
+  return (
+    <EmployeesContext.Provider value={useEmployeeSource()}>
+      {children}
+    </EmployeesContext.Provider>
+  );
 }

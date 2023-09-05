@@ -1,7 +1,7 @@
 import { useIncomeSource } from "../store/income";
 import { useMatch } from "@tanstack/react-location";
 import { IncomesForm } from "../ui/incomes-form";
-import { useEmployeeSource } from "../../employees/store";
+import { useEmployee } from "../../employees/store";
 import { useIncomeTypeSource } from "../store/income-type";
 
 export function IncomesEdit() {
@@ -9,7 +9,7 @@ export function IncomesEdit() {
     params: { id },
   } = useMatch();
   const { incomes, editIncome } = useIncomeSource();
-  const { employees } = useEmployeeSource();
+  const { employees } = useEmployee();
   const { income_types } = useIncomeTypeSource();
 
   const income = incomes.find((income) => income.id === +id);

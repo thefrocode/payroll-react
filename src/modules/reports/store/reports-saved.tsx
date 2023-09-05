@@ -10,7 +10,7 @@ export function useSavedReportsSource() {
       ...state,
       ...action,
     }),
-    {
+    { 
       employee_id: "",
       month: "",
       year: "",
@@ -29,9 +29,6 @@ export function useSavedReportsSource() {
     dispatch(params)
   },[])
   
-
-  console.log("Saved State", state);
-  console.log("Saved Reports", data);
   return { data, filterReports };
 
   function filterFalsy(obj: { [x: string]: any }) {

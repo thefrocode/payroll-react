@@ -12,7 +12,7 @@ import {
   fetchDeductions,
   updateDeduction,
 } from "../../shared/data-access/api/deductions";
-import { useEmployeeSource } from "../../employees/store";
+import { useEmployee } from "../../employees/store";
 import { useDeductionTypeSource } from "./deduction-type";
 import { useMemo } from "react";
 import { useShared } from "../../shared/store/active";
@@ -59,12 +59,12 @@ export function useDeductionSource(): {
       alert("Deduction Deleted");
     },
   });
-  const { employees } = useEmployeeSource();
+  const { employees } = useEmployee();
   const { deduction_types } = useDeductionTypeSource();
   
   const { detailed_deductions } = useMemo(() => {
     const detailed_deductions = deductions.map((deduction) => {
-      const employee = employees.find(
+      const employee = employees?.find(
         (employee) => employee.id === deduction.employee_id
       );
       const deduction_type = deduction_types.find(
@@ -72,11 +72,11 @@ export function useDeductionSource(): {
       );
       return {
         ...deduction,
-        employee_name: employee?.first_name + " " + employee?.last_name,
+        employee_name: employee?(employee?.first_name + " " + employee?.last_name): undefined,
         deduction_type_name: (deduction_type?.name)!,
         deduction_type_code: (deduction_type?.code)!,
       };
-    });
+    }).filter((employee)=>employee.employee_name);
 
     return { detailed_deductions };
   }, [deductions, employees, deduction_types]);

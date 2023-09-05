@@ -6,7 +6,6 @@ import { ActiveMonth } from "../../interfaces/active-month";
 axios.defaults.baseURL = "http://localhost:3001";
 export async function fetchIncomes({queryKey}:any): Promise<Income[]> {
   const [_key, { month, year }] = queryKey
-  console.log(queryKey)
   try {
     const incomes = await axios.get("/incomes", { params: { month, year } });
     return incomes.data;

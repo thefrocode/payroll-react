@@ -5,7 +5,6 @@ import { TDetailedDeduction } from "../../shared/interfaces/deduction";
 
 export function DeductionsList() {
   const { detailed_deductions, removeDeduction } = useDeductionSource();
-
   const columnDefs: {
     headerName: string;
     field: string;

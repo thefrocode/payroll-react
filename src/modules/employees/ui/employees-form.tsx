@@ -78,6 +78,23 @@ export function EmployeesForm(props: any) {
 
       {errors.nhif_number && <span>This field is required</span>}
 
+      <input
+        placeholder="Branch"
+        defaultValue={employee?.branch}
+        {...register("branch", {
+          required: true,
+        })}
+      />
+      {errors.branch && <span>This field is required</span>}
+      <input
+        placeholder="Department"
+        defaultValue={employee?.department}
+        {...register("department", {
+          required: true,
+        })}
+      />
+      {errors.department && <span>This field is required</span>}
+
       <input type="submit" className="submit"/>
     </form>
   );

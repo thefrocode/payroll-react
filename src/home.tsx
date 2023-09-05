@@ -1,5 +1,6 @@
 import { Link, Outlet } from "@tanstack/react-location";
-import { useShared } from "./modules/shared/store/active";
+import { useEmployee } from "./modules/employees/store";
+
 const Navbar = () => {
   return (
     <nav className="sticky top-0 bg-blue-500 p-4 text-white row-span-6">
@@ -30,11 +31,18 @@ const Navbar = () => {
   );
 };
 const TopBar = () => {
+  const { filterEmployees } = useEmployee();
   return (
     <div className="sticky top-0 bg-gray-200 p-4">
       <div className="container mx-auto">
         {/* Top bar content goes here */}
         <div>Welcome, User!</div>
+        <input
+          placeholder="Search"
+          onChange={(e) => {
+            filterEmployees(e.target.value);
+          }}
+        />
       </div>
     </div>
   );
@@ -49,8 +57,6 @@ const MainView = () => {
 };
 
 export function Home() {
-  console.log("Home Rendered")
-  
 
   return (
     <div className="grid grid-cols-[210px,1fr] grid-rows-[70px,1fr] overflow-y-hidden">

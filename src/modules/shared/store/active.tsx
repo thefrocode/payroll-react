@@ -16,7 +16,6 @@ export function useSharedSource() {
 
   const currentDate = new Date();
   useEffect(() => {
-    console.log("active_month", active_month);
     if (!active_month) {
       addActiveMonth({
         month: currentDate.getMonth() + 1,

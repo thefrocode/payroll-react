@@ -12,9 +12,9 @@ import {
   fetchIncomes,
   updateIncome,
 } from "../../shared/data-access/api/incomes";
-import { useEmployeeSource } from "../../employees/store";
+import { useEmployee } from "../../employees/store";
 import { useIncomeTypeSource } from "./income-type";
-import { useCallback, useMemo } from "react";
+import { useMemo } from "react";
 import { DetailedIncome } from "../../shared/interfaces/income";
 import { useShared } from "../../shared/store/active";
 
@@ -66,12 +66,12 @@ export function useIncomeSource(): {
     },
   });
 
-  const { employees } = useEmployeeSource();
+  const { employees } = useEmployee();
   const { income_types } = useIncomeTypeSource();
 
   const { detailed_incomes } = useMemo(() => {
     const detailed_incomes = incomes.map((income) => {
-      const employee = employees.find(
+      const employee = employees?.find(
         (employee) => employee.id === income.employee_id
       );
       const income_type = income_types.find(
@@ -79,11 +79,11 @@ export function useIncomeSource(): {
       );
       return {
         ...income,
-        employee_name: employee?.first_name + " " + employee?.last_name,
+        employee_name: employee?(employee?.first_name + " " + employee?.last_name):undefined,
         income_type_name: income_type?.name!,
         income_type_code: income_type?.code!,
       };
-    });
+    }).filter((employee)=>employee.employee_name);
 
     return { detailed_incomes };
   }, [incomes, employees, income_types]);
