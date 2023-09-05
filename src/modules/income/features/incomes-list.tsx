@@ -38,13 +38,16 @@ export function IncomesList() {
   });
 
   return (
-    <div className="ag-theme-alpine" style={{ height: 500, width: 1000 }}>
-      <Link to="/incomes/add">Add</Link>
+    <>
+      <h6 className="text-lg text-bold">Incomes</h6>
+      <div className="ag-theme-alpine" style={{ height: 500, width: 1000 }}>
+        <Link to="/incomes/add">Add</Link>
 
-      <AgGridReact
-        rowData={detailed_incomes} // Row Data for Rows
-        columnDefs={columnDefs}
-      />
-    </div>
+        <AgGridReact
+          rowData={detailed_incomes} // Row Data for Rows
+          columnDefs={columnDefs}
+        />
+      </div>
+    </>
   );
 }

@@ -1,8 +1,9 @@
 import { AgGridReact } from "ag-grid-react";
 import { TReportNSSF } from "../../shared/interfaces/report";
 import { useReportsSource } from "../store/reports";
+import { useCurrentReportsSource } from "../store/reports-current";
 export function ReportsNSSF() {
-  const { employeeIncomeDeduction: rowData } = useReportsSource();
+  const { data: rowData } = useCurrentReportsSource();
   const columnDefs: {
     headerName: string;
     field: string;

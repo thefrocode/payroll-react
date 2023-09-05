@@ -3,7 +3,8 @@ import axios from "axios";
 import { ActiveMonth } from "../../interfaces/active-month";
 
 axios.defaults.baseURL = "http://localhost:3001";
-export async function fetchActiveMonth(): Promise<ActiveMonth> {
+export async function fetchActiveMonth() {
+  console.log("Api fetchActiveMonth")
   try {
     const reports = await axios.get("/active_month");
     return reports.data;

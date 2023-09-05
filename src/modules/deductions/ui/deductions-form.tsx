@@ -10,11 +10,14 @@ export function DeductionsForm(props: any) {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data: any) => onSave({...data,...active_month});
+  const onSubmit = (data: any) => onSave({ ...data, ...active_month });
 
   return (
     /* "handleSubmit" will validate your inputs before invoking "onSubmit" */
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      className="flex flex-col w-1/2 mx-auto"
+    >
       <select
         {...register("employee_id", {
           valueAsNumber: true,
@@ -56,41 +59,7 @@ export function DeductionsForm(props: any) {
 
       {errors.amount && <span>This field is required</span>}
 
-      {/* <select
-        {...register("month", {
-          valueAsNumber: true,
-          required: true,
-        })}
-      >
-        <option value="">Select Month</option>
-        {months.map((month: any) => {
-          return (
-            <option key={month.id} value={month.id}>
-              {month.name}
-            </option>
-          );
-        })}
-      </select>
-      {errors.month && <span>This field is required</span>}
-
-      <select
-        {...register("year", {
-          valueAsNumber: true,
-          required: true,
-        })}
-      >
-        <option value="">Select Year</option>
-        {years.map((year: any) => {
-          return (
-            <option key={year} value={year}>
-              {year}
-            </option>
-          );
-        })}
-      </select>
-      {errors.year && <span>This field is required</span>} */}
-
-      <input type="submit" />
+      <input type="submit" className="submit"/>
     </form>
   );
 }

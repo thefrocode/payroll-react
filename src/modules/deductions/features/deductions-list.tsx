@@ -30,7 +30,10 @@ export function DeductionsList() {
     headerName: "Delete",
     cellRenderer: (params: any) => {
       return (
-        <button key={params.value} onClick={() => removeDeduction(params.value)}>
+        <button
+          key={params.value}
+          onClick={() => removeDeduction(params.value)}
+        >
           Edit
         </button>
       );
@@ -38,13 +41,17 @@ export function DeductionsList() {
   });
 
   return (
-    <div className="ag-theme-alpine" style={{ height: 500, width: 1000 }}>
+    <>
+      <h6 className="text-lg text-bold">Deductions</h6>
       <Link to="/deductions/add">Add</Link>
+      <div className="ag-theme-alpine" style={{ height: 500, width: 1000 }}>
+        
 
-      <AgGridReact
-        rowData={detailed_deductions} // Row Data for Rows
-        columnDefs={columnDefs}
-      />
-    </div>
+        <AgGridReact
+          rowData={detailed_deductions} // Row Data for Rows
+          columnDefs={columnDefs}
+        />
+      </div>
+    </>
   );
 }

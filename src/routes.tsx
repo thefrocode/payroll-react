@@ -11,6 +11,7 @@ import { IncomesList } from "./modules/income/features/incomes-list";
 import { ReportsList } from "./modules/reports/features/reports-list";
 import { ReportsNHIF } from "./modules/reports/features/reports-nhif";
 import { ReportsNSSF } from "./modules/reports/features/reports-nssf";
+import { ReportsSaved } from "./modules/reports/features/reports-saved";
 
 export const routes = [
   {
@@ -19,7 +20,7 @@ export const routes = [
   },
   {
     path: "/employees",
-
+    element: <Home />,
     children: [
       {
         path: "/",
@@ -91,6 +92,24 @@ export const routes = [
       {
         path: "/",
         element: <ReportsList />,
+      },
+      {
+        path: "/nhif",
+        element: <ReportsNHIF />,
+      },
+      {
+        path: "/nssf",
+        element: <ReportsNSSF />,
+      },
+    ],
+  },
+  {
+    path: "/saved_reports",
+    element: <Home />,
+    children: [
+      {
+        path: "/",
+        element: <ReportsSaved />,
       },
       {
         path: "/nhif",

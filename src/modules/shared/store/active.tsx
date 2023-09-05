@@ -1,12 +1,13 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { useEffect } from "react";
+import { createContext, useContext, useEffect } from "react";
 import { createActiveMonth, fetchActiveMonth } from "../data-access/api/shared";
 
-export function useShared() {
+export function useSharedSource() {
   const { data: active_month, error } = useQuery(
     ["active_month"],
     fetchActiveMonth,
   );
+  
 
   const { mutate: addActiveMonth } = useMutation({
     mutationFn: createActiveMonth,
@@ -15,6 +16,7 @@ export function useShared() {
 
   const currentDate = new Date();
   useEffect(() => {
+    console.log("active_month", active_month);
     if (!active_month) {
       addActiveMonth({
         month: currentDate.getMonth() + 1,
@@ -23,6 +25,21 @@ export function useShared() {
     }
   }, [active_month]);
 
-  console.log(active_month);
+  
   return { active_month };
+  
+}
+const ActiveContext = createContext<ReturnType<typeof useSharedSource>>(
+  {} as unknown as ReturnType<typeof useSharedSource>
+);
+
+export function useShared() {
+  return useContext(ActiveContext);
+}
+export function ActiveProvider({ children }: { children: React.ReactNode }) {
+  return (
+    <ActiveContext.Provider value={useSharedSource()}>
+      {children}
+    </ActiveContext.Provider>
+  );
 }

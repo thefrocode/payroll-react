@@ -3,18 +3,17 @@ import { Link } from "@tanstack/react-location";
 import { useEmployeeSource } from "../store";
 import { TEmployee } from "../../shared/interfaces/employee";
 
-
-
 export function EmployeesList() {
-  const { employees, removeEmployee} = useEmployeeSource();
+  console.log("EmployeesList Rendered");
+  const { employees, removeEmployee } = useEmployeeSource();
 
-  const columnDefs:{
+  const columnDefs: {
     headerName: string;
     field: string;
     cellRenderer?: (params: any) => any;
   }[] = Object.keys(TEmployee).map((key) => ({
     headerName: key.replace("_", " ").toString().toLocaleUpperCase(),
-    field: key
+    field: key,
   }));
   columnDefs.push({
     field: "id",
@@ -32,23 +31,23 @@ export function EmployeesList() {
     headerName: "Delete",
     cellRenderer: (params: any) => {
       return (
-        <button key={params.value} onClick={()=> removeEmployee(params.value)}>
+        <button key={params.value} onClick={() => removeEmployee(params.value)}>
           Edit
         </button>
       );
     },
   });
 
-
-
   return (
-    <div className="ag-theme-alpine" style={{ height: 500, width: 1000 }}>
+    <>
+      
       <Link to="/employees/add">Add</Link>
-
-      <AgGridReact
-        rowData={employees} // Row Data for Rows
-        columnDefs={columnDefs}
-      />
-    </div>
+      <div className="ag-theme-alpine" style={{ height: 500, width: 1000 }}>
+        <AgGridReact
+          rowData={employees} // Row Data for Rows
+          columnDefs={columnDefs}
+        />
+      </div>
+    </>
   );
 }
