@@ -13,10 +13,15 @@ import {
 import { routes } from "./routes";
 import { useShared } from "./modules/shared/store/active";
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+     retry: false,
+    },
+  },
+});
 const location = new ReactLocation();
 function App() {
-  
   return (
     <div style={{ height: 500, width: 500 }}>
       <QueryClientProvider client={queryClient}>

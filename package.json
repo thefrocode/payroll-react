@@ -51,6 +51,7 @@
     ]
   },
   "devDependencies": {
+    "tailwindcss": "^3.3.3",
     "ts-morph": "^19.0.0"
   }
 }

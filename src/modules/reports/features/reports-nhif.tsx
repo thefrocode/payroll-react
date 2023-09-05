@@ -1,5 +1,5 @@
 import { AgGridReact } from "ag-grid-react";
-import { TReport, TReportNHIF } from "../../shared/interfaces/report";
+import { TReportNHIF } from "../../shared/interfaces/report";
 import { useReportsSource } from "../store/reports";
 export function ReportsNHIF() {
   const { employeeIncomeDeduction: rowData } = useReportsSource();

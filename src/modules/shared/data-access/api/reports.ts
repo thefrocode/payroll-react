@@ -2,12 +2,17 @@ import { Report } from "../../interfaces/report";
 import axios from "axios";
 //import axios from "../../config/axiosConfig";
 axios.defaults.baseURL = "http://localhost:3001";
-export async function fetchSavedReports(): Promise<Report[]> {
-  try {
-    const reports = await axios.get("/reports");
-    return reports.data;
-  } catch (e) {
-    throw e;
+
+export async function fetchSavedReports(IRe): Promise<Report[]> {
+  console.log(queryKey)
+  if(queryKey[1] !== undefined){
+    try {
+      const reports = await axios.get("/reports", { params: { employee_id,month, year } });
+      return reports.data;
+    } catch (e) {
+      throw e;
+    }
+
   }
 }
 

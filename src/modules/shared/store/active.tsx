@@ -5,7 +5,7 @@ import { createActiveMonth, fetchActiveMonth } from "../data-access/api/shared";
 export function useShared() {
   const { data: active_month, error } = useQuery(
     ["active_month"],
-    fetchActiveMonth
+    fetchActiveMonth,
   );
 
   const { mutate: addActiveMonth } = useMutation({
@@ -22,7 +22,7 @@ export function useShared() {
       });
     }
   }, [active_month]);
-  
+
   console.log(active_month);
   return { active_month };
 }

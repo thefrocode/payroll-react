@@ -23,7 +23,7 @@
 //     "total_deductions":string
 // }
 export interface Report {
-    [key:string]: string | number
+    [key:string]: string | number | undefined
 }
 
 export const TReport= {
