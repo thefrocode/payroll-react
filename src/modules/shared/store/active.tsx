@@ -1,18 +1,37 @@
-import { useMutation, useQuery } from "@tanstack/react-query";
-import { createContext, useContext, useEffect } from "react";
-import { createActiveMonth, fetchActiveMonth } from "../data-access/api/shared";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { createContext, useCallback, useContext, useEffect } from "react";
+import {
+  createActiveMonth,
+  fetchActiveMonth,
+  updateActiveMonth,
+} from "../data-access/api/shared";
 
 export function useSharedSource() {
+  const queryClient = useQueryClient();
   const { data: active_month, error } = useQuery(
     ["active_month"],
-    fetchActiveMonth,
+    fetchActiveMonth
   );
-  
 
   const { mutate: addActiveMonth } = useMutation({
     mutationFn: createActiveMonth,
+    onSuccess: () => {
+      console.log("Active month set", active_month);
+    },
     onError: (error) => {},
   });
+  const { mutate: editActiveMonth } = useMutation({
+    mutationFn: updateActiveMonth,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["active_month"] });
+      alert("Month Closed Successfull");
+    },
+    onError: (error) => {},
+  });
+
+  const closeMonth = useCallback(() => {
+    editActiveMonth();
+  }, []);
 
   const currentDate = new Date();
   useEffect(() => {
@@ -22,11 +41,9 @@ export function useSharedSource() {
         year: currentDate.getFullYear(),
       });
     }
-  }, [active_month]);
+  }, []);
 
-  
-  return { active_month };
-  
+  return { active_month, closeMonth };
 }
 const ActiveContext = createContext<ReturnType<typeof useSharedSource>>(
   {} as unknown as ReturnType<typeof useSharedSource>

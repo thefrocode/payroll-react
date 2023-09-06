@@ -23,6 +23,7 @@ import {
 
 function useEmployeeSource(): {
   employees?: Employee[];
+  no_of_employees?: number;
   addEmployee: UseMutateFunction<void, unknown, Employee, unknown>;
   editEmployee: UseMutateFunction<void, unknown, Employee, unknown>;
   removeEmployee: UseMutateFunction<void, unknown, number, unknown>;
@@ -86,6 +87,7 @@ function useEmployeeSource(): {
 
   return {
     employees: filteredEmployees,
+    no_of_employees: employees?.length,
     addEmployee,
     editEmployee,
     removeEmployee,

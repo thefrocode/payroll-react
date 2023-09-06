@@ -20,6 +20,7 @@ import { useShared } from "../../shared/store/active";
 
 export function useIncomeSource(): {
   incomes: Income[];
+  total_income: number;
   addIncome: UseMutateFunction<void, unknown, Income, unknown>;
   editIncome: UseMutateFunction<void, unknown, Income, unknown>;
   removeIncome: UseMutateFunction<void, unknown, number, unknown>;
@@ -69,6 +70,12 @@ export function useIncomeSource(): {
   const { employees } = useEmployee();
   const { income_types } = useIncomeTypeSource();
 
+  const total_income = useMemo(() => {
+    return incomes.reduce((total, income) => {
+      return total + income.amount;
+    }, 0);
+  }, [incomes]);
+
   const { detailed_incomes } = useMemo(() => {
     const detailed_incomes = incomes.map((income) => {
       const employee = employees?.find(
@@ -90,6 +97,7 @@ export function useIncomeSource(): {
 
   return {
     incomes,
+    total_income,
     addIncome,
     editIncome,
     removeIncome,

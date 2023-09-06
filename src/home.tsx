@@ -36,7 +36,6 @@ const TopBar = () => {
     <div className="sticky top-0 bg-gray-200 p-4">
       <div className="container mx-auto">
         {/* Top bar content goes here */}
-        <div>Welcome, User!</div>
         <input
           placeholder="Search"
           onChange={(e) => {

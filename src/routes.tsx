@@ -12,13 +12,24 @@ import { ReportsList } from "./modules/reports/features/reports-list";
 import { ReportsNHIF } from "./modules/reports/features/reports-nhif";
 import { ReportsNSSF } from "./modules/reports/features/reports-nssf";
 import { ReportsSaved } from "./modules/reports/features/reports-saved";
+import { Index } from "./modules";
 
 export const routes = [
   {
     path: "/",
     element: <Home />,
   },
-  {
+  { 
+    path: "/index",
+    element: <Home/>,
+    children:[
+      {
+        path: '/',
+        element: <Index/>
+      }
+    ]
+    
+  },{
     path: "/employees",
     element: <Home />,
     children: [

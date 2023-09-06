@@ -19,6 +19,7 @@ import { useShared } from "../../shared/store/active";
 
 export function useDeductionSource(): {
   deductions: Deduction[];
+  total_deductions: number;
   addDeduction: UseMutateFunction<void, unknown, Deduction, unknown>;
   editDeduction: UseMutateFunction<void, unknown, Deduction, unknown>;
   removeDeduction: UseMutateFunction<void, unknown, number, unknown>;
@@ -61,6 +62,12 @@ export function useDeductionSource(): {
   });
   const { employees } = useEmployee();
   const { deduction_types } = useDeductionTypeSource();
+
+  const  total_deductions = useMemo(()=>{
+    return deductions.reduce((total, deduction)=>{
+      return deduction.amount+total
+    },0)
+  },[deductions])
   
   const { detailed_deductions } = useMemo(() => {
     const detailed_deductions = deductions.map((deduction) => {
@@ -80,5 +87,5 @@ export function useDeductionSource(): {
 
     return { detailed_deductions };
   }, [deductions, employees, deduction_types]);
-  return { deductions, addDeduction, editDeduction, removeDeduction, error, detailed_deductions };
+  return { deductions, total_deductions,addDeduction, editDeduction, removeDeduction, error, detailed_deductions };
 }
