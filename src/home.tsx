@@ -60,7 +60,7 @@ export function Home() {
   return (
     <div className="grid grid-cols-[210px,1fr] grid-rows-[70px,1fr] overflow-y-hidden">
       <Navbar />
-
+      
       <TopBar />
       <MainView />
     </div>

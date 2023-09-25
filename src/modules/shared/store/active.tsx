@@ -5,8 +5,12 @@ import {
   fetchActiveMonth,
   updateActiveMonth,
 } from "../data-access/api/shared";
+import { ActiveMonth } from "../interfaces/active-month";
 
-export function useSharedSource() {
+export function useSharedSource(): {
+  active_month: ActiveMonth;
+  closeMonth: ()=> void
+} {
   const queryClient = useQueryClient();
   const { data: active_month, error } = useQuery(
     ["active_month"],

@@ -4,7 +4,7 @@ import { useIncomeSource } from "./income/store/income";
 import { useShared } from "./shared/store/active";
 
 export function Index() {
-  const { closeMonth } = useShared();
+  const { active_month, closeMonth } = useShared();
   const { no_of_employees } = useEmployee();
   const { total_income } = useIncomeSource();
   const { total_deductions } = useDeductionSource();
@@ -13,6 +13,7 @@ export function Index() {
       <p>No of Employees: {no_of_employees}</p>
       <p>Total Income: {total_income}</p>
       <p>Total Deductions: {total_deductions}</p>
+      <p>Active Month: {active_month.month} - {active_month.year}</p>
       <button onClick={() => closeMonth()}>Close</button>;
     </div>
   );
